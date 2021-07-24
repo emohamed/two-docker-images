@@ -27,6 +27,9 @@ resource "docker_image" "php" {
 resource "docker_container" "mysql" {
     name = "mysql"
     image = docker_image.mysql.latest
+    env = [
+        "MYSQL_ROOT_PASSWORD=12345"
+    ]
 }
 
 resource "docker_container" "php" {
@@ -41,5 +44,8 @@ resource "docker_container" "php" {
         target = "/var/www/html"
         source = "${path.cwd}/site"
     }
+    env = [
+        "MYSQL_HOST=${docker_container.mysql.ip_address}"
+    ]
 }
 

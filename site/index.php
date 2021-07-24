@@ -11,7 +11,7 @@
    $database = "docker_info";
    $user = "root";
    $password  = "12345";
-   $host = "dob-mysql";
+   $host = $_ENV["MYSQL_HOST"];
 
    try {
       $connection = new PDO("mysql:host={$host};dbname={$database};charset=utf8", $user, $password);
