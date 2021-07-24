@@ -46,6 +46,7 @@
       }
    }
    catch (PDOException $e) {
+       var_dump($e->getMessage());
       print "<h3>There is no database available. Try again later.</h3>\n";
       print "<h3>Meanwhile you can check <a href=\"https://docs.docker.com/\">here</a> for more information.\n";
    }
