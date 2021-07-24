@@ -24,3 +24,22 @@ resource "docker_image" "php" {
     }
 }
 
+resource "docker_container" "mysql" {
+    name = "mysql"
+    image = docker_image.mysql.latest
+}
+
+resource "docker_container" "php" {
+    name = "php"
+    image = docker_image.php.latest
+    ports {
+        internal = 80
+        external = 5435
+    }
+    mounts {
+        type = "bind"
+        target = "/var/www/html"
+        source = "${path.cwd}/site"
+    }
+}
+
